@@ -1,0 +1,31 @@
+name: nodejs-feature-pipeline
+on:
+  workflow_call:
+    inputs:
+      project:
+        description: 'Project name'
+        required: true
+        type: string
+      component: 
+        description: 'Component'
+        required: true
+        type: string
+      environment:
+        description: 'Environment'
+        required: true
+        type: string
+
+jobs:
+  trigger:
+    runs_on: self_hosted
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      - name: lists the file
+        run: ls -la
+        
+
+
+
+
