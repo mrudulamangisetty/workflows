@@ -19,7 +19,7 @@ env:
 jobs:
   # Job name
   trigger:
-    runs-on: self-hosted # Github hosted runners
+    runs_on: self-hosted # Github hosted runners
     steps:
       - name: checkout code
         uses: actions/checkout@v6
