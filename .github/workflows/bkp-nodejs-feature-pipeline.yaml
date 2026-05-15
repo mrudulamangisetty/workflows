@@ -1,0 +1,52 @@
+#session 80
+name: nodejs-feature-pipeline
+on:
+  workflow_call:
+    inputs:
+      project:
+        description: 'Project name'
+        required: true
+        type: string
+      component: 
+        description: 'Component'
+        required: true
+        type: string
+      environment:
+        description: 'Environment'
+        required: true
+        type: string
+
+jobs:
+  trigger:
+    runs_on: self_hosted
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      # - name: lists the file
+      #   run: ls -la
+      - name:  read version
+        id: package_version
+        run: |
+          APP_VERSION=$(jq -r .version package.json)
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
+        # jq A JSON parser for command line. Used to extract values from JSON files cleanly.
+        # with r->1.2.3 without r "1.2.3" r-> raw output
+
+      - name: install npm dependencies
+        run: npm install
+
+      - name: unit tests
+        id: tests
+        run: npm test  
+
+# 17:20 sonar 
+# GENERATE TOKEN IN SONARQUBE with name 'github'
+# -git org level- settings-> secrets and variables add secret   SONAR_TOKEN  ( add here token above)    
+#     add sonar url as variable
+#     do dependentabot settings--> session:80-time-29:00 ->git repo level
+
+
+
+
+
