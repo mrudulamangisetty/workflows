@@ -26,7 +26,7 @@ runs:
         REPO: ${{ github.repository }}
         SHA: ${{ github.sha }}
       run: |
-        curl -sf \
+        curl -sfv \
           -X POST \
           -H "Authorization: Bearer $TOKEN" \
           -H "Accept: application/vnd.github+json" \
