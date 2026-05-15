@@ -40,7 +40,7 @@ jobs:
         id: unit_tests
         run: npm test
 
-      - name: UpdateStatus — sonar-scan
+      - name: UpdateStatus — unit_tests
         # for custom actions no need to mention file name
         uses: mrudulamangisetty/workflows/.github/actions/update-commit-status@main
         with:
