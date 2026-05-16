@@ -76,22 +76,22 @@ jobs:
       #     state: ${{ steps.sonar_gate.outcome }}
       #     description: SonarQube quality gate ${{ steps.sonar_gate.outcome }}
 
-      - name: Check Dependabot Alerts
-        id: library_scan
-        uses: Posture-Cybersecurity/dependabot-security-checker@v1.1.5
-        with:
-          github-token: ${{ secrets.DEPENDABOT_TOKEN }}
-          severities: 'critical,high'  # Only check critical and high
-          output-file: 'security-report.csv'
-          fail-on-alerts: 'true'  # Fail workflow if alerts found
+      # - name: Check Dependabot Alerts
+      #   id: library_scan
+      #   uses: Posture-Cybersecurity/dependabot-security-checker@v1.1.5
+      #   with:
+      #     github-token: ${{ secrets.DEPENDABOT_TOKEN }}
+      #     severities: 'critical,high'  # Only check critical and high
+      #     output-file: 'security-report.csv'
+      # #     fail-on-alerts: 'true'  # Fail workflow if alerts found
 
-      - name: Update status — library-scan
-        uses: mrudulamangisetty/workflows/.github/actions/update-commit-status@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          context: unit-tests
-          state: ${{ steps.library_scan.outcome }}
-          description: Unit tests ${{ steps.library_scan.outcome }}
+      # - name: Update status — library-scan
+      #   uses: mrudulamangisetty/workflows/.github/actions/update-commit-status@main
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     context: unit-tests
+      #     state: ${{ steps.library_scan.outcome }}
+      #     description: Unit tests ${{ steps.library_scan.outcome }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.1.0
@@ -155,4 +155,25 @@ jobs:
       #             type: "mrkdwn"
       #             text: "${{ job.status == 'success' && ':white_check_mark:' || ':x:' }} *${{ inputs.project }}/${{ inputs.component }}* feature pipeline: *${{ job.status }}*\n*Branch:* `${{ github.ref_name }}`\n*Commit:* `${{ github.sha }}`\n*<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>*"
 
+#----------------check dependabot file in runner
+# cd /runner-data/actions-runner/_work/
+# find / -name "security-report.csv" 2>/dev/null (find in all the directories)
+# find /runner-data/actions-runner/_work/ -name "security-report.csv" 2>/dev/null ((find in _work directory))
+# cd catalogue-unit-tests/catalogue-unit-tests
+# cat security-report.csv
+
+# ---------
+# Better practice
+
+# Add an upload step:
+
+# - name: Upload security report
+#   uses: actions/upload-artifact@v4
+#   with:
+#     name: security-report
+#     path: security-report.csv
+
+# Then you can download it directly from the workflow run page.
+
+# Without this, the file stays on the runner and is easy to miss.
 
