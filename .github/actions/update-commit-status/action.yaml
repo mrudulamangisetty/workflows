@@ -26,7 +26,7 @@ runs:
         REPO: ${{ github.repository }}
         SHA: ${{ github.sha }}
       run: |
-        curl -sfv \
+        curl -sf \
           -X POST \
           -H "Authorization: Bearer $TOKEN" \
           -H "Accept: application/vnd.github+json" \
@@ -35,3 +35,6 @@ runs:
           -d "{\"state\":\"$STATE\",\"context\":\"$CONTEXT\",\"description\":\"$DESCRIPTION\"}" \
           "https://api.github.com/repos/$REPO/statuses/$SHA"
 
+
+# ${{ github.sha }}
+# This is the commit ID of the code currently being executed.
