@@ -11,13 +11,13 @@ on:
         description: 'Component name'
         required: true
         type: string
+permissions:
+  security_events: write # allows uploading/mdifying security scan results
+  contents: read # allows checking out code        
 env:
   project: ${{ inputs.project }}
   component: ${{ inputs.component }}
   acc_id: 833415032280
-permissions:
-  security_events: write # allows uploading/mdifying security scan results
-  contents: read # allows checking out code 
 jobs:
   # Job name
   trigger:
