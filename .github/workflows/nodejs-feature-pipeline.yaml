@@ -12,7 +12,7 @@ on:
         required: true
         type: string
 permissions:
-  security_events: write # allows uploading/mdifying security scan results
+  security-events: write # allows uploading/mdifying security scan results
   contents: read # allows checking out code        
 env:
   project: ${{ inputs.project }}
