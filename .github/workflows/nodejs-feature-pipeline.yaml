@@ -11,9 +11,7 @@ on:
         description: 'Component name'
         required: true
         type: string
-permissions:
-  security-events: write # allows uploading/mdifying security scan results
-  contents: read # allows checking out code        
+       
 env:
   project: ${{ inputs.project }}
   component: ${{ inputs.component }}
@@ -157,5 +155,4 @@ jobs:
       #             type: "mrkdwn"
       #             text: "${{ job.status == 'success' && ':white_check_mark:' || ':x:' }} *${{ inputs.project }}/${{ inputs.component }}* feature pipeline: *${{ job.status }}*\n*Branch:* `${{ github.ref_name }}`\n*Commit:* `${{ github.sha }}`\n*<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>*"
 
-      # even with a Personal Access token(pat) added workflows  must explicitlly grant access to secuirty
-      #    events because dependabot triggers run as read only by deafault
+
