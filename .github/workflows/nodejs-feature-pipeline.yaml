@@ -1,3 +1,4 @@
+#SESSION 80
 name: nodejs-feature-branch-workflow
 on: 
   # some one should call this
@@ -183,4 +184,18 @@ jobs:
 # Then you can download it directly from the workflow run page.
 
 # Without this, the file stays on the runner and is easy to miss.
+-------------------------
+#Dependabot alerts are tied to your repository's committed code.
+#So the only way to dismiss an alert is to fix it in the actual source files
+ #  and push them to the main branch. Until that happens,
+ # the alert stays open — no matter what you do in CI, locally, or anywhere else.
+ ------------package-lock.json
+ # cd /runner-data/actions-runner/_work/
+ # cd catalogue-unit-tests/catalogue-unit-tests
+ # ls -l
+ # cat package-lock.json | grep "redis"
+ # rm -rf node_modules package-lock.json
+ # npm ls redis ---> shows version
+ # git add package.json package-lock.json
+ # npm install
 
