@@ -37,8 +37,9 @@ jobs:
 
       - name: install dependencies
         run: |
+           rm -rf node_modules package-lock.json  
            npm install
-           rm -rf node_modules package-lock.json
+      
 
       - name: unit tests
         id: unit_tests
