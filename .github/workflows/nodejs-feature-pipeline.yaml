@@ -90,8 +90,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: library-scan
-          state: ${{ steps.library_scan.outcome }} 
-          description:Library scan ${{ steps.library_scan.outcome }}
+          state: ${{ steps.library_scan.outcome == 'success' && 'success' || 'failure' }}
+          description: Library scan ${{ steps.library_scan.outcome }}
+          # state: ${{ steps.library_scan.outcome }} 
+
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.1.0
