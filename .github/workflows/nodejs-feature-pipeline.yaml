@@ -37,8 +37,8 @@ jobs:
 
       - name: install dependencies
         run: |
-           rm -rf node_modules package-lock.json  
-           git add package.json package-lock.json
+           #rm -rf node_modules package-lock.json  
+           #git add package.json package-lock.json
            npm install
       
 
