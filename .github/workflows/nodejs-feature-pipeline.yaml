@@ -149,19 +149,19 @@ jobs:
           state: ${{ steps.push_image.outcome }}
           description: Unit tests ${{ steps.push_image.outcome }}
 
-      # - name: Slack alert
-      #   if: always()
-      #   uses: slackapi/slack-github-action@v3.0.3
-      #   with:
-      #     webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     webhook-type: incoming-webhook
-      #     payload: |
-      #       text: "${{ job.status == 'success' && ':white_check_mark:' || ':x:' }} *${{ inputs.project }}/${{ inputs.component }}* feature pipeline *${{ job.status }}*"
-      #       blocks:
-      #         - type: "section"
-      #           text:
-      #             type: "mrkdwn"
-      #             text: "${{ job.status == 'success' && ':white_check_mark:' || ':x:' }} *${{ inputs.project }}/${{ inputs.component }}* feature pipeline: *${{ job.status }}*\n*Branch:* `${{ github.ref_name }}`\n*Commit:* `${{ github.sha }}`\n*<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>*"
+      - name: Slack alert
+        if: always()
+        uses: slackapi/slack-github-action@v3.0.3
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "${{ job.status == 'success' && ':white_check_mark:' || ':x:' }} *${{ inputs.project }}/${{ inputs.component }}* feature pipeline *${{ job.status }}*"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "${{ job.status == 'success' && ':white_check_mark:' || ':x:' }} *${{ inputs.project }}/${{ inputs.component }}* feature pipeline: *${{ job.status }}*\n*Branch:* `${{ github.ref_name }}`\n*Commit:* `${{ github.sha }}`\n*<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>*"
 
 #----------------check dependabot file in runner
 # cd /runner-data/actions-runner/_work/
