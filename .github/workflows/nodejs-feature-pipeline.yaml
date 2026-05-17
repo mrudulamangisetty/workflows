@@ -36,7 +36,9 @@ jobs:
         run: echo "$APP_VERSION"
 
       - name: install dependencies
-        run: npm install
+        run: |
+           npm install
+           rm -rf node_modules package-lock.json
 
       - name: unit tests
         id: unit_tests
