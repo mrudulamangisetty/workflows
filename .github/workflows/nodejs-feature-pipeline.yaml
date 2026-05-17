@@ -76,22 +76,22 @@ jobs:
           state: ${{ steps.sonar_gate.outcome }}
           description: SonarQube quality gate ${{ steps.sonar_gate.outcome }} #from context 
 
-      # - name: Check Dependabot Alerts
-      #   id: library_scan
-      #   uses: Posture-Cybersecurity/dependabot-security-checker@v1.1.5
-      #   with:
-      #     github-token: ${{ secrets.DEPENDABOT_TOKEN }}
-      #     severities: 'critical,high'  # Only check critical and high
-      #     output-file: 'security-report.csv'
-      # #     fail-on-alerts: 'true'  # Fail workflow if alerts found
+      - name: Check Dependabot Alerts
+        id: library_scan
+        uses: Posture-Cybersecurity/dependabot-security-checker@v1.1.5
+        with:
+          github-token: ${{ secrets.DEPENDABOT_TOKEN }}
+          severities: 'critical,high'  # Only check critical and high
+          output-file: 'security-report.csv'
+          fail-on-alerts: 'true'  # Fail workflow if alerts found
 
-      # - name: Update status — library-scan
-      #   uses: mrudulamangisetty/workflows/.github/actions/update-commit-status@main
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     context: library-scan
-      #     state: ${{ steps.library_scan.outcome }}
-      #     description:Library scan ${{ steps.library_scan.outcome }}
+      - name: Update status — library-scan
+        uses: mrudulamangisetty/workflows/.github/actions/update-commit-status@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          context: library-scan
+          state: ${{ steps.library_scan.outcome }} 
+          description:Library scan ${{ steps.library_scan.outcome }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.1.0
